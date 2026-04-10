@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="App ReUse - Comparteix i reutilitza objectes">
+    <title>ReUse</title>
+
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <!-- SUPERIOR -->
+    <div id="superior">
+        ReUse
+    </div>
+
+    <!-- SECCIONS -->
+
+    <!-- HOME -->
+    <div id="seccio_home" class="seccio">
+        <h1>Benvingut/da</h1>
+        <button onclick="mostrarSeccio('seccio_login')">Inicia sessio</button>
+        <button onclick="mostrarSeccio('seccio_registre')">Registre</button>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="seccio_login" class="seccio">
+        <h2>Inicia Sessio</h2>
+        <input type="text" placeholder="Usuari"><br>
+        <input type="password" placeholder="Contrasenya"><br>
+        <button onclick="mostrarSeccio('seccio_feed')">Entrar</button>
+    </div>
+
+    <!-- REGISTRE -->
+    <div id="seccio_registre" class="seccio">
+        <h2>Registre</h2>
+        <input type="text" placeholder="Usuari"><br>
+        <input type="email" placeholder="Email"><br>
+        <input type="password" placeholder="Contrasenya"><br>
+        <button onclick="mostrarSeccio('seccio_feed')">Registrar</button>
+    </div>
+
+    <!-- FEED -->
+    <div id="seccio_feed" class="seccio">
+        <h2>Mur de publicacions</h2>
+        <div class="card"> Sofa - Poc us</div>
+        <div class="card"> Cadira - Nou</div>
+    </div>
+
+    <!-- AFEGIR OBJECTE -->
+    <div id="seccio_afegir" class="seccio">
+        <h2>Afegir objecte</h2>
+        <input type="text" placeholder="Nom objecte"><br>
+        <select>
+            <option>Categoria</option>
+            <option>Mobles</option>
+            <option>Electronica</option>
+        </select><br>
+        <button onclick="alert('Publicat!')">Publicar</button>
+    </div>
+
+    <!-- PERFIL -->
+    <div id="seccio_perfil" class="seccio">
+        <h2>Perfil del usuari</h2>
+        <p>Objectes:</p>
+        <div class="card">Disponible</div>
+        <div class="card">Reservat</div>
+    </div>
+
+    <!-- MENU -->
+    <div id="menu">
+        <button onclick="mostrarSeccio('seccio_home')">🏠</button>
+        <button onclick="mostrarSeccio('seccio_feed')">🔍</button>
+        <button onclick="mostrarSeccio('seccio_afegir')">➕</button>
+        <button onclick="mostrarSeccio('seccio_perfil')">👤</button>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

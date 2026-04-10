@@ -1,0 +1,72 @@
+html {
+    height: -webkit-fill-available;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #f0f5f3;
+}
+
+/* SUPERIOR */
+#superior {
+    display: flex;
+    height: 8vh;
+    justify-content: center;
+    align-items: center;
+    font-size: 4vh;
+    color: white;
+    background-color: #2e7d32;
+}
+
+/* SECCIONS */
+.seccio {
+    flex: 1;
+    display: none;
+    padding: 20px;
+}
+
+#seccio_home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CARDS */
+.card {
+    background: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* BOTONS */
+button {
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    background-color: #2e7d32;
+    color: white;
+    border-radius: 8px;
+}
+
+/* INPUTS */
+input, select {
+    padding: 10px;
+    margin: 5px;
+    width: 80%;
+}
+
+/* MENU */
+#menu {
+    display: flex;
+    justify-content: space-around;
+    height: 8vh;
+    background-color: #c8e6c9;
+}
