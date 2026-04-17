@@ -12,7 +12,7 @@ body {
     background-color: #f0f5f3;
 }
 
-/* SUPERIOR */
+
 #superior {
     display: flex;
     height: 8vh;
@@ -23,7 +23,7 @@ body {
     background-color: #2e7d32;
 }
 
-/* SECCIONS */
+
 .seccio {
     flex: 1;
     display: none;
@@ -37,7 +37,7 @@ body {
     align-items: center;
 }
 
-/* CARDS */
+
 .card {
     background: white;
     padding: 15px;
@@ -46,7 +46,7 @@ body {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* BOTONS */
+
 button {
     padding: 10px;
     margin: 5px;
@@ -56,17 +56,38 @@ button {
     border-radius: 8px;
 }
 
-/* INPUTS */
+
 input, select {
     padding: 10px;
     margin: 5px;
     width: 80%;
 }
 
-/* MENU */
+
 #menu {
     display: flex;
     justify-content: space-around;
-    height: 8vh;
+    align-items: center;
+    height: 10vh; /* més gran */
     background-color: #c8e6c9;
+}
+
+#menu button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: #2e7d32;
+    font-size: 18px;
+}
+
+#menu button span {
+    font-size: 24px; /* icona més gran */
+}
+
+#menu button p {
+    margin: 0;
+    font-size: 12px;
 }

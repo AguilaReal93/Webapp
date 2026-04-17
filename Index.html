@@ -11,14 +11,14 @@
 
 <body>
 
-    <!-- SUPERIOR -->
+
     <div id="superior">
         ReUse
     </div>
 
-    <!-- SECCIONS -->
+    
 
-    <!-- HOME -->
+
     <div id="seccio_home" class="seccio">
         <h1>Benvingut/da</h1>
         <button onclick="mostrarSeccio('seccio_login')">Inicia sessio</button>
@@ -33,7 +33,7 @@
         <button onclick="mostrarSeccio('seccio_feed')">Entrar</button>
     </div>
 
-    <!-- REGISTRE -->
+ 
     <div id="seccio_registre" class="seccio">
         <h2>Registre</h2>
         <input type="text" placeholder="Usuari"><br>
@@ -42,14 +42,14 @@
         <button onclick="mostrarSeccio('seccio_feed')">Registrar</button>
     </div>
 
-    <!-- FEED -->
+   
     <div id="seccio_feed" class="seccio">
         <h2>Mur de publicacions</h2>
         <div class="card"> Sofa - Poc us</div>
         <div class="card"> Cadira - Nou</div>
     </div>
 
-    <!-- AFEGIR OBJECTE -->
+
     <div id="seccio_afegir" class="seccio">
         <h2>Afegir objecte</h2>
         <input type="text" placeholder="Nom objecte"><br>
@@ -61,7 +61,7 @@
         <button onclick="alert('Publicat!')">Publicar</button>
     </div>
 
-    <!-- PERFIL -->
+
     <div id="seccio_perfil" class="seccio">
         <h2>Perfil del usuari</h2>
         <p>Objectes:</p>
@@ -69,13 +69,28 @@
         <div class="card">Reservat</div>
     </div>
 
-    <!-- MENU -->
-    <div id="menu">
-        <button onclick="mostrarSeccio('seccio_home')">🏠</button>
-        <button onclick="mostrarSeccio('seccio_feed')">🔍</button>
-        <button onclick="mostrarSeccio('seccio_afegir')">Afegir</button>
-        <button onclick="mostrarSeccio('seccio_perfil')">👤</button>
-    </div>
+
+<div id="menu">
+    <button onclick="mostrarSeccio('seccio_home')">
+        <span>🏠</span>
+        <p>Inici</p>
+    </button>
+
+    <button onclick="mostrarSeccio('seccio_feed')">
+        <span>🔍</span>
+        <p>Buscar</p>
+    </button>
+
+    <button onclick="mostrarSeccio('seccio_afegir')">
+        <span>⊕</span>
+        <p>Vendre</p>
+    </button>
+
+    <button onclick="mostrarSeccio('seccio_perfil')">
+        <span>👤</span>
+        <p>Perfil</p>
+    </button>
+</div>
 
     <script src="script.js"></script>
 
