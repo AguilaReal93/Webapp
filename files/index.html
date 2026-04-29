@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="description" content="ReUse — Comparteix i reutilitza objectes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>ReUse</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+    <!-- ══ TOP BAR ══ -->
+    <div id="superior">
+        <div class="logo-wrap">
+            <button class="back-btn" id="back-btn" onclick="goBack()" aria-label="Tornar">←</button>
+            <div class="logo-icon" aria-hidden="true">♻️</div>
+            <span class="logo-text">ReUse</span>
+        </div>
+        <div class="top-actions" id="top-actions">
+            <button class="top-icon-btn" onclick="openNotifPanel()" aria-label="Notificacions">
+                🔔
+                <span class="notif-badge" id="notif-badge">3</span>
+            </button>
+            <button class="top-icon-btn" onclick="openSettingsPanel()" aria-label="Ajustes">⚙️</button>
+        </div>
+    </div>
+
+    <!-- ══ ① BENVINGUDA ══ -->
+    <div id="seccio_home" class="seccio activa">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:40px 30px;">
+            <div class="home-brand">
+                <div class="big-icon" aria-hidden="true">♻️</div>
+                <h1>ReUse</h1>
+                <p class="tagline">Comparteix, reutilitza, connecta</p>
+            </div>
+
+            <div class="home-actions">
+                <button class="btn-primary" onclick="nav('seccio_login')">Inicia sessió</button>
+                <button class="btn-secondary" onclick="nav('seccio_registre')">Registra't</button>
+            </div>
+
+            <p style="margin-top:32px;font-size:13px;color:var(--text-light);text-align:center;line-height:1.7;">
+                La plataforma per donar una segona<br>vida als objectes que ja no necessites.
+            </p>
+        </div>
+    </div>
+
+    <!-- ══ ② LOGIN ══ -->
+    <div id="seccio_login" class="seccio form-screen">
+        <h2>Benvingut/da! 👋</h2>
+        <p class="sub">Inicia sessió per continuar</p>
+
+        <div class="field-group">
+            <div class="field-wrap">
+                <label for="login-email">Correu o nom d'usuari</label>
+                <input id="login-email" type="text" placeholder="exemple@correu.cat" autocomplete="username">
+            </div>
+            <div class="field-wrap">
+                <label for="login-pass">Contrasenya</label>
+                <input id="login-pass" type="password" placeholder="••••••••" autocomplete="current-password">
+            </div>
+        </div>
+
+        <button class="btn-primary" onclick="doLogin()">Entrar</button>
+
+        <div class="link-row">
+            Nou per aquí? <span onclick="nav('seccio_registre')">Registra't</span>
+        </div>
+    </div>
+
+    <!-- ══ ③ REGISTRE ══ -->
+    <div id="seccio_registre" class="seccio form-screen">
+        <h2>Crea el compte 🌱</h2>
+        <p class="sub">Uneix-te a la comunitat ReUse</p>
+
+        <div class="field-group">
+            <div class="field-wrap">
+                <label for="reg-user">Nom d'usuari</label>
+                <input id="reg-user" type="text" placeholder="el_teu_nom" autocomplete="username">
+            </div>
+            <div class="field-wrap">
+                <label for="reg-email">Correu electrònic</label>
+                <input id="reg-email" type="email" placeholder="exemple@correu.cat" autocomplete="email">
+            </div>
+            <div class="field-wrap">
+                <label for="reg-pass">Contrasenya</label>
+                <input id="reg-pass" type="password" placeholder="Mínim 8 caràcters" autocomplete="new-password">
+            </div>
+        </div>
+
+        <button class="btn-primary" onclick="doRegister()">Registrar-me</button>
+
+        <div class="link-row">
+            Ja tens compte? <span onclick="nav('seccio_login')">Inicia sessió</span>
+        </div>
+    </div>
+
+    <!-- ══ ④ FEED ══ -->
+    <div id="seccio_feed" class="seccio">
+        <div class="feed-header">
+            <h2>Mur de publicacions</h2>
+            <div class="search-bar">
+                <span aria-hidden="true">🔍</span>
+                <input id="feed-search" type="search" placeholder="Cerca objectes..." aria-label="Cerca objectes">
+            </div>
+        </div>
+
+        <div class="cat-pills">
+            <div class="pill active" onclick="selPill(this)" role="button" tabindex="0">Tot</div>
+            <div class="pill" onclick="selPill(this)" role="button" tabindex="0">Mobles</div>
+            <div class="pill" onclick="selPill(this)" role="button" tabindex="0">Electrònica</div>
+            <div class="pill" onclick="selPill(this)" role="button" tabindex="0">Roba</div>
+            <div class="pill" onclick="selPill(this)" role="button" tabindex="0">Esports</div>
+            <div class="pill" onclick="selPill(this)" role="button" tabindex="0">Llar</div>
+        </div>
+
+        <div class="feed-list" id="feed-list">
+            <!-- Rendered by JS -->
+        </div>
+    </div>
+
+    <!-- ══ ⑤ DETALL D'OBJECTE ══ -->
+    <div id="seccio_detail" class="seccio">
+        <div class="detail-content">
+            <!-- Rendered by JS -->
+        </div>
+    </div>
+
+    <!-- ══ ⑥ AFEGIR OBJECTE ══ -->
+    <div id="seccio_afegir" class="seccio">
+        <div class="afegir-header">
+            <h2>Afegir objecte</h2>
+            <p style="margin-top:4px;font-size:13px;color:var(--text-light);">Publica un objecte per compartir-lo</p>
+        </div>
+
+        <label class="upload-zone" aria-label="Afegir fotos">
+            <input type="file" accept="image/*" multiple onchange="handleAddImages(this)" aria-hidden="true">
+            <div class="upload-icon" aria-hidden="true">📷</div>
+            <p>Afegeix fotos de l'objecte</p>
+            <small>Toca per obrir la càmera o galeria</small>
+        </label>
+
+        <div class="img-preview-row" id="img-preview-row"></div>
+
+        <div class="form-inner">
+            <div class="field-wrap">
+                <label for="item-name">Nom de l'objecte</label>
+                <input id="item-name" type="text" placeholder="Ex: Sofà beige 2 places">
+            </div>
+
+            <div class="field-wrap">
+                <label for="item-cat">Categoria</label>
+                <select id="item-cat">
+                    <option value="">Selecciona categoria</option>
+                    <option>Mobles</option>
+                    <option>Electrònica</option>
+                    <option>Roba</option>
+                    <option>Esports</option>
+                    <option>Llar i cuina</option>
+                    <option>Llibres</option>
+                    <option>Altres</option>
+                </select>
+            </div>
+
+            <div class="field-wrap">
+                <label>Estat</label>
+                <div class="estat-group">
+                    <div class="estat-btn sel" onclick="selEstat(this)" role="button" tabindex="0">Nou</div>
+                    <div class="estat-btn" onclick="selEstat(this)" role="button" tabindex="0">Poc ús</div>
+                    <div class="estat-btn" onclick="selEstat(this)" role="button" tabindex="0">Normal</div>
+                    <div class="estat-btn" onclick="selEstat(this)" role="button" tabindex="0">Usat</div>
+                </div>
+            </div>
+
+            <div class="field-wrap">
+                <label for="item-desc">Descripció</label>
+                <textarea id="item-desc" placeholder="Detalls, dimensions, color, ubicació de recollida..."></textarea>
+            </div>
+
+            <button class="btn-primary" onclick="publishItem()">
+                📢 Publicar
+            </button>
+        </div>
+    </div>
+
+    <!-- ══ ⑦ XATS ══ -->
+    <div id="seccio_xats" class="seccio">
+        <div class="xats-header">
+            <h2>Missatges</h2>
+        </div>
+        <div class="chat-list" id="chat-list">
+            <!-- Rendered by JS -->
+        </div>
+    </div>
+
+    <!-- ══ ⑧ PERFIL ══ -->
+    <div id="seccio_perfil" class="seccio">
+        <div class="perfil-header">
+            <div class="avatar-wrap" onclick="openEditProfile()">
+                <div class="avatar" id="profile-avatar">👤</div>
+                <div class="avatar-edit-badge" aria-hidden="true">✏️</div>
+            </div>
+            <div class="perfil-name" id="profile-name">Miansa</div>
+            <div class="perfil-handle" id="profile-handle">@uemissa</div>
+            <button class="perfil-edit-btn" onclick="openEditProfile()">✏️ Editar perfil</button>
+        </div>
+
+        <div style="padding: 0 14px 100px;">
+            <div class="perfil-card">
+                <div class="perfil-stats">
+                    <div class="stat-item">
+                        <div class="stat-num" id="stat-publicats">5</div>
+                        <div class="stat-label">Publicats</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num" id="stat-donats">12</div>
+                        <div class="stat-label">Donats</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num" id="stat-reservats">3</div>
+                        <div class="stat-label">Reservats</div>
+                    </div>
+                </div>
+
+                <div class="perfil-divider"></div>
+                <div class="objectes-title">Els meus objectes</div>
+                <div id="my-items-list">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ ⑨ EDITAR PERFIL ══ -->
+    <div id="seccio_edit_perfil" class="seccio form-screen" style="background:white;">
+        <h2>Editar perfil</h2>
+        <p class="sub">Actualitza la teva informació</p>
+
+        <div class="edit-avatar-wrap">
+            <div class="edit-avatar" id="edit-profile-avatar">
+                👤
+                <input type="file" accept="image/*" onchange="handleAvatarUpload(this)" aria-label="Canviar foto de perfil">
+            </div>
+            <span class="edit-avatar-label">Canviar foto</span>
+        </div>
+
+        <div class="field-group">
+            <div class="field-wrap">
+                <label for="edit-name">Nom complet</label>
+                <input id="edit-name" type="text" placeholder="El teu nom">
+            </div>
+            <div class="field-wrap">
+                <label for="edit-handle">Nom d'usuari</label>
+                <input id="edit-handle" type="text" placeholder="nom_usuari">
+            </div>
+            <div class="field-wrap">
+                <label for="edit-bio">Biografia</label>
+                <textarea id="edit-bio" placeholder="Explica't en poques paraules..."></textarea>
+            </div>
+        </div>
+
+        <button class="btn-primary" onclick="saveProfile()">💾 Desar canvis</button>
+        <div class="link-row" style="margin-top:12px;">
+            <span onclick="goBack()" style="color:var(--text-light);">Cancel·lar</span>
+        </div>
+    </div>
+
+    <!-- ══ BOTTOM NAV ══ -->
+    <nav id="menu" role="navigation" aria-label="Navegació principal">
+        <button class="nav-btn active" id="nav-home" onclick="nav('seccio_feed');setNav('nav-home')" aria-label="Inici">
+            <div class="nav-icon-wrap">
+                <span class="nav-icon">🏠</span>
+            </div>
+            <span class="nav-label">Inici</span>
+        </button>
+
+        <button class="nav-btn" id="nav-cerca" onclick="nav('seccio_feed');setNav('nav-cerca');document.getElementById('feed-search').focus()" aria-label="Buscar">
+            <div class="nav-icon-wrap">
+                <span class="nav-icon">🔍</span>
+            </div>
+            <span class="nav-label">Buscar</span>
+        </button>
+
+        <div class="nav-add-wrap">
+            <button class="nav-add-btn" onclick="nav('seccio_afegir');setNav('')" aria-label="Afegir objecte">＋</button>
+        </div>
+
+        <button class="nav-btn" id="nav-msg" onclick="nav('seccio_xats');setNav('nav-msg');renderChats()" aria-label="Missatges">
+            <div class="nav-icon-wrap">
+                <span class="nav-icon">💬</span>
+                <span class="nav-dot show" id="nav-dot-msg" aria-hidden="true"></span>
+            </div>
+            <span class="nav-label">Xats</span>
+        </button>
+
+        <button class="nav-btn" id="nav-perfil" onclick="nav('seccio_perfil');setNav('nav-perfil')" aria-label="Perfil">
+            <div class="nav-icon-wrap">
+                <span class="nav-icon">👤</span>
+            </div>
+            <span class="nav-label">Perfil</span>
+        </button>
+    </nav>
+
+    <!-- ══ MODAL: CANVIAR ESTAT ══ -->
+    <div class="modal-overlay" id="estat-modal" onclick="closeModal(event)" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-sheet" onclick="event.stopPropagation()">
+            <div class="modal-handle" aria-hidden="true"></div>
+            <h3 id="modal-title">Marcar objecte com a:</h3>
+            <div class="modal-btns">
+                <button class="modal-btn disponible" onclick="setEstat('disponible')">🟢 Disponible</button>
+                <button class="modal-btn donat"      onclick="setEstat('donat')">✔ Donat</button>
+                <button class="modal-btn reservat"   onclick="setEstat('reservat')">🕐 Reservat</button>
+                <button class="modal-btn no-disp"    onclick="setEstat('no-disp')">✖ No disponible</button>
+                <button class="modal-btn cancel"     onclick="closeModal()">Cancel·lar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ MODAL: NOTIFICACIONS ══ -->
+    <div class="modal-overlay" id="notif-modal" onclick="closeNotifModal(event)" role="dialog" aria-modal="true" aria-label="Notificacions">
+        <div class="modal-sheet" onclick="event.stopPropagation()">
+            <div class="modal-handle" aria-hidden="true"></div>
+            <h3>🔔 Notificacions</h3>
+            <div class="notif-list" id="notif-list">
+                <!-- Rendered by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ MODAL: AJUSTES ══ -->
+    <div class="modal-overlay" id="settings-modal" onclick="closeSettingsModal(event)" role="dialog" aria-modal="true" aria-label="Ajustes">
+        <div class="modal-sheet" onclick="event.stopPropagation()">
+            <div class="modal-handle" aria-hidden="true"></div>
+            <h3>⚙️ Ajustes</h3>
+            <div class="settings-list">
+                <div class="settings-item" onclick="toggleSetting('notifs')">
+                    <div class="settings-left">
+                        <div class="settings-icon">🔔</div>
+                        <div>
+                            <div class="settings-name">Notificacions push</div>
+                            <div class="settings-sub">Rebre alertes de missatges</div>
+                        </div>
+                    </div>
+                    <button class="toggle on" id="toggle-notifs" aria-label="Activar notificacions"></button>
+                </div>
+
+                <div class="settings-item" onclick="toggleSetting('ubicació')">
+                    <div class="settings-left">
+                        <div class="settings-icon">📍</div>
+                        <div>
+                            <div class="settings-name">Ubicació</div>
+                            <div class="settings-sub">Mostrar objectes propers</div>
+                        </div>
+                    </div>
+                    <button class="toggle on" id="toggle-ubicacio" aria-label="Activar ubicació"></button>
+                </div>
+
+                <div class="settings-item" onclick="toggleSetting('emails')">
+                    <div class="settings-left">
+                        <div class="settings-icon">✉️</div>
+                        <div>
+                            <div class="settings-name">Correus electrònics</div>
+                            <div class="settings-sub">Rebre novetats per mail</div>
+                        </div>
+                    </div>
+                    <button class="toggle" id="toggle-emails" aria-label="Activar correus"></button>
+                </div>
+
+                <div class="settings-item" onclick="nav('seccio_edit_perfil');closeSettingsModal()">
+                    <div class="settings-left">
+                        <div class="settings-icon">👤</div>
+                        <div>
+                            <div class="settings-name">Editar perfil</div>
+                            <div class="settings-sub">Nom, foto i descripció</div>
+                        </div>
+                    </div>
+                    <span class="settings-arrow">›</span>
+                </div>
+
+                <div class="settings-item" onclick="showToast('🔒 Funcionalitat pròximament');closeSettingsModal()">
+                    <div class="settings-left">
+                        <div class="settings-icon">🔒</div>
+                        <div>
+                            <div class="settings-name">Privadesa</div>
+                            <div class="settings-sub">Gestionar dades del compte</div>
+                        </div>
+                    </div>
+                    <span class="settings-arrow">›</span>
+                </div>
+
+                <div class="settings-item" onclick="nav('seccio_home');closeSettingsModal();showToast('👋 Sessió tancada')">
+                    <div class="settings-left">
+                        <div class="settings-icon">🚪</div>
+                        <div>
+                            <div class="settings-name" style="color:#c62828;">Tancar sessió</div>
+                        </div>
+                    </div>
+                    <span class="settings-arrow" style="color:#c62828;">›</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+</div><!-- /app-shell -->
+
+<script src="js/app.js"></script>
+</body>
+</html>
